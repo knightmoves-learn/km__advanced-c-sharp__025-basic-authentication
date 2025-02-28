@@ -24,6 +24,7 @@ namespace HomeEnergyApi.Controllers
             this.mapper = mapper;
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult CreateHome([FromBody] HomeDto homeDto)
         {
