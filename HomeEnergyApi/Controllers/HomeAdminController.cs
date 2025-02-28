@@ -3,6 +3,7 @@ using HomeEnergyApi.Models;
 using HomeEnergyApi.Services;
 using HomeEnergyApi.Dtos;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HomeEnergyApi.Controllers
 {
@@ -23,6 +24,7 @@ namespace HomeEnergyApi.Controllers
             this.mapper = mapper;
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult CreateHome([FromBody] HomeDto homeDto)
         {

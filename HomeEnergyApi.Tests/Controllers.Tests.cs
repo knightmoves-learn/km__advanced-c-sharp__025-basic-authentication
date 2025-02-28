@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Mvc.Testing;
 using HomeEnergyApi.Dtos;
 
 
@@ -74,11 +75,11 @@ public class ControllersTests
         postTestHomeDto.StreetAddress = "123 Test St.";
         postTestHomeDto.City = "Test City";
         postTestHomeDto.MonthlyElectricUsage = 123;
-        //postTestHomeDto.UtilityProviderIds = new List<int> { 1 };
 
         string strPostTestHomeDto = JsonSerializer.Serialize(postTestHomeDto);
 
         HttpRequestMessage sendRequest = new HttpRequestMessage(HttpMethod.Post, url);
+        sendRequest.Headers.Authorization =  new AuthenticationHeaderValue("Basic", BuildBase64EncodedAuthString("username","password"));
         sendRequest.Content = new StringContent(strPostTestHomeDto,
                                                 Encoding.UTF8,
                                                 "application/json");
@@ -164,10 +165,18 @@ public class ControllersTests
         string bangResponseStr = await bangResponse.Content.ReadAsStringAsync();
         string expected = "{\"message\":\"An unexpected error occurred.\",\"error\":\"You caused a loud bang.\"}";
 
-        Assert.True((int)bangResponse.StatusCode == 500,            
+        Assert.True((int)bangResponse.StatusCode == 500,
             $"HomeEnergyApi did not return '500: Internal Server Error' HTTP Response Code on GET request at {url}; instead received {(int)bangResponse.StatusCode}: {bangResponse.StatusCode}");
 
         Assert.True(bangResponseStr == expected,
             $"HomeEnergyApi did not return the expected result on GET request at {url}\nExpected:{expected}\nReceived:{bangResponseStr}");
+    }
+
+    public string BuildBase64EncodedAuthString(string username, string password)
+    {
+        var authenticationString = $"{username}:{password}";
+        var base64EncodedAuthenticationString = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(authenticationString));
+
+        return base64EncodedAuthenticationString;
     }
 }
