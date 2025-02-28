@@ -2,8 +2,10 @@ public class FileTests
 {
     private static string programFilePath = @"../../../../HomeEnergyApi/Program.cs";
     private static string homeDtoFilePath = @"../../../../HomeEnergyApi/Dtos/HomeDto.cs";
+    private static string homeAdminControllerFilePath = @"../../../../HomeEnergyApi/Controllers/HomeAdminController.cs";
     private string programContent = File.ReadAllText(programFilePath);
     private string homeDtoContent = File.ReadAllText(homeDtoFilePath);
+    private string homeAdminControllerContent = File.ReadAllText(homeAdminControllerFilePath);
 
     [Fact]
     public void DoesProgramFileAddScopedServiceHomeRepository()
@@ -117,11 +119,19 @@ public class FileTests
             "HomeEnergyApi/Dtos/HomeDto.cs does not contain the attribute '[HomeStreetAddressValid]'");
     }
 
-        [Fact]
+    [Fact]
     public void DoesProgramAddControllerOptionToAddGlobalExceptionFilter()
     {
         bool containsOptionAddingGlobalExceptionFilter = programContent.Contains("options.Filters.Add<GlobalExceptionFilter>();");
         Assert.True(containsOptionAddingGlobalExceptionFilter,
             "HomeEnergyApi/Program.cs does not add a controller option adding 'GlobalExceptionFilter' as a filter");
+    }
+    
+    [Fact]
+    public void DoesHomeAdminControllerHaveAuthroizeHeader()
+    {
+        bool containsAuthHeader = homeAdminControllerContent.Contains("[Authorize]");
+        Assert.True(containsAuthHeader,
+            "HomeEnergyApi/Controllers/HomeAdminController.cs does not add an authorization header to it's POST method");
     }
 }

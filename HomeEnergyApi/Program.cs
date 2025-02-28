@@ -40,13 +40,6 @@ builder.Services.AddControllers(options =>
 
 builder.Services.AddAutoMapper(typeof(HomeProfile));
 
-builder.Configuration.AddJsonFile("secrets.json");
-        
-builder.Services.AddAuthentication("BasicAuthentication")
-    .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
-
-builder.Services.AddAuthorization();
-
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -54,9 +47,6 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<HomeDbContext>();
     db.Database.Migrate();
 }
-
-app.UseAuthentication();
-app.UseAuthorization();
 
 app.MapControllers();
 

@@ -2,8 +2,8 @@
 
 ## Lecture
 
-[![# Basic Authentication (Part 2)](https://img.youtube.com/vi/h8DWSgf2PfM/0.jpg)](https://www.youtube.com/watch?v=h8DWSgf2PfM)
-[![# Basic Authentication (Part 1)](https://img.youtube.com/vi/h8DWSgf2PfM/0.jpg)](https://www.youtube.com/watch?v=h8DWSgf2PfM)
+[![# Basic Authentication (Part 2)](https://img.youtube.com/vi/tghZt5Y0GB8/0.jpg)](https://www.youtube.com/watch?v=tghZt5Y0GB8)
+[![# Basic Authentication (Part 1)](https://img.youtube.com/vi/dPk-aMxZCEE/0.jpg)](https://www.youtube.com/watch?v=dPk-aMxZCEE)
 
 ## Instructions
 
