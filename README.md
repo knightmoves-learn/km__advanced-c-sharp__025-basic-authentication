@@ -2,8 +2,8 @@
 
 ## Lecture
 
-[![# Basic Authentication (Part 2)](https://img.youtube.com/vi/tghZt5Y0GB8/0.jpg)](https://www.youtube.com/watch?v=tghZt5Y0GB8)
-[![# Basic Authentication (Part 1)](https://img.youtube.com/vi/dPk-aMxZCEE/0.jpg)](https://www.youtube.com/watch?v=dPk-aMxZCEE)
+[![# Basic Authentication (Part 1)](https://img.youtube.com/vi/tghZt5Y0GB8/0.jpg)](https://www.youtube.com/watch?v=tghZt5Y0GB8)
+[![# Basic Authentication (Part 2)](https://img.youtube.com/vi/dPk-aMxZCEE/0.jpg)](https://www.youtube.com/watch?v=dPk-aMxZCEE)
 
 ## Instructions
 
@@ -32,7 +32,7 @@ In `HomeEnergyApi/Authorization/BasicAuthenticationHandler.cs`
         - `HandleAuthenticateAsync()` should return `AuthenticateResult.Fail("Missing Authorization header")` if the request headers do NOT contain an `Authorization` key
         - Within a try block..
             - Set a variable to the authorization header using `AuthenticationHeaderValue.Parse(Request.Headers["Authorization"])`
-            - Set a variable to the byte value of the authorization header by using `Convert.FromBase64String` on it's `Paramter` property
+            - Set a variable to the byte value of the authorization header by using `Convert.FromBase64String` on it's `Parameter` property
             - Set a variable to an array containing both authorization string values by converting the byte value of the authorization header with `Encoding.UTF8.GetString()` and using `String.Split()` to split that value on the `:` character
             - Set a variable to the first value in the resulting array to get the username, and the second value to get the password
             - If the username and password variables you retrieved match the `_username` and `_password` properties...
@@ -51,7 +51,7 @@ In `HomeEnergyApi/Program.cs`
 - Call `UseAuthentication()` and `UseAuthorization` on the `app`
 
 In `HomeEnergyApi/Controllers/HomeAdminController.cs`
-- Add the `[Authorize]` tag to the `CreatHome()` method
+- Add the `[Authorize]` tag to the `CreateHome()` method
 
 ## Additional Information
 - Do not remove or modify anything in `HomeEnergyApi.Tests`
